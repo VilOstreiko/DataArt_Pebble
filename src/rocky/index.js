@@ -14,18 +14,34 @@ rocky.on('draw', function(event) {
   var w = ctx.canvas.unobstructedWidth;
   var h = ctx.canvas.unobstructedHeight;
 
+//   ctx.fillStyle = 'green';
+//   ctx.fillRect(0, 30, 144, 30);
+  
+
   
   //Draw time
   // Current date/time
   var d = new Date();
   // Set the text color
-  ctx.fillStyle = 'white';
+  ctx.fillStyle = '#00AAFF';
   // Center align the text
   ctx.textAlign = 'center';
- // ctx.font = '18px Gothic';
+  ctx.font = '28px Gothic';
   // Display the time, in the middle of the screen
-  ctx.fillText(d.toLocaleTimeString(), w / 2, h / 2, w); 
- 
+  var verticalTextOffset = -25;
+  ctx.fillText(d.toLocaleTimeString(), w / 2, h / 2 + verticalTextOffset, w); 
+  
+  
+  var day = d.getDate().toString();
+  var month =  (d.getMonth() + 1).toString();
+  var year = d.getUTCFullYear();
+  
+  var thisDate = day + '/' + month + '/' + year;
+  ctx.fillStyle = 'lightblue';
+  
+   verticalTextOffset = 5;
+  ctx.fillText(thisDate, w / 2, h / 2 + verticalTextOffset, w); 
+  
   
   // Draw the conditions (before clock hands, so it's drawn underneath them)
   if (weather) {
@@ -35,12 +51,24 @@ rocky.on('draw', function(event) {
 });
 
 //Handle app time
+
+rocky.on('secondchange', function(event) {
+
+  //Invalidate current UI
+  // Request the screen to be redrawn on next pass
+  rocky.requestDraw();
+
+});
+
+
 rocky.on('minutechange', function(event) {
   // Display a message in the system logs
   console.log("Another minute with your Pebble!");
 
   // Request the screen to be redrawn on next pass
-  rocky.requestDraw();
+  //rocky.requestDraw();
+  
+  rocky.postMessage({'fetch': true});
 });
 
 rocky.on('hourchange', function(event) {
@@ -49,16 +77,26 @@ rocky.on('hourchange', function(event) {
 });
 
 
-rocky.on('secondchange', function(event) {
-  // Display a message in the system logs
-  console.log("Hello world. Another minute with your Pebble!");
 
-  //Invalidate current UI
-  // Request the screen to be redrawn on next pass
-  rocky.requestDraw();
+function drawWeather(ctx, weather) {
+  // Create a string describing the weather
+  var weatherString = weather.celcius + 'ºC, ' + weather.desc;
+  // Draw the text, top center
+  ctx.fillStyle = 'lightblue';
+  ctx.textAlign = 'center';
+  ctx.font = '18px Gothic';
+  ctx.fillText(weatherString, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 60);
   
-  rocky.postMessage({'fetch': true});
-});
+//     // Draw the text, top center
+  var forecastString = 'Clouds ' + weather.fullresponse.clouds.all +  ', Wind ' +
+      weather.fullresponse.wind.speed +  'm/s';
+  ctx.fillText(forecastString, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 41);
+  
+  var cityString = weather.place;
+  // Draw City
+  ctx.fillStyle = 'lightgreen';
+  ctx.fillText(cityString, ctx.canvas.unobstructedWidth / 2 ,  ctx.canvas.unobstructedHeight - 22);
+}
 
 rocky.on('message', function(event) {
   // Receive a message from the mobile device (pkjs)
@@ -72,15 +110,3 @@ rocky.on('message', function(event) {
     rocky.requestDraw();
   }
 });
-
-
-function drawWeather(ctx, weather) {
-  // Create a string describing the weather
-  var weatherString = weather.celcius + 'ºC, ' + weather.desc;
-  // Draw the text, top center
-  ctx.fillStyle = 'lightgray';
-  ctx.textAlign = 'center';
-  ctx.font = '18px Gothic';
-  ctx.fillText(weatherString, ctx.canvas.unobstructedWidth / 2, 2);
-}
-
