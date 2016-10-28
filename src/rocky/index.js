@@ -28,7 +28,7 @@ rocky.on('draw', function(event) {
   ctx.textAlign = 'center';
   ctx.font = '28px Gothic';
   // Display the time, in the middle of the screen
-  var verticalTextOffset = -25;
+  var verticalTextOffset = -45;
   ctx.fillText(d.toLocaleTimeString(), w / 2, h / 2 + verticalTextOffset, w); 
   
   
@@ -39,7 +39,7 @@ rocky.on('draw', function(event) {
   var thisDate = day + '/' + month + '/' + year;
   ctx.fillStyle = 'lightblue';
   
-   verticalTextOffset = 5;
+   verticalTextOffset = -15;
   ctx.fillText(thisDate, w / 2, h / 2 + verticalTextOffset, w); 
   
   

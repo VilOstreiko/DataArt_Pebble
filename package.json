@@ -4,6 +4,9 @@
     "keywords": [],
     "name": "workshop",
     "pebble": {
+        "capabilities": [
+            "location"
+        ],
         "displayName": "WorkShop",
         "enableMultiJS": true,
         "messageKeys": [],
@@ -12,6 +15,12 @@
             "media": []
         },
         "sdkVersion": "3",
+        "targetPlatforms": [
+            "basalt",
+            "chalk",
+            "diorite",
+            "emery"
+        ],
         "uuid": "062c2fe2-0bb5-490d-994c-d7ae44ca3787",
         "watchapp": {
             "watchface": false
