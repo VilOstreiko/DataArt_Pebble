@@ -1,0 +1,21 @@
+{
+    "author": "nahttoter@gmail.com",
+    "dependencies": {},
+    "keywords": [],
+    "name": "workshop",
+    "pebble": {
+        "displayName": "WorkShop",
+        "enableMultiJS": true,
+        "messageKeys": [],
+        "projectType": "rocky",
+        "resources": {
+            "media": []
+        },
+        "sdkVersion": "3",
+        "uuid": "062c2fe2-0bb5-490d-994c-d7ae44ca3787",
+        "watchapp": {
+            "watchface": false
+        }
+    },
+    "version": "1.0.0"
+}
