@@ -26,8 +26,8 @@ Pebble.on('message', function(event) {
 //               '&lon=' + '48.464717' +
 //               '&appid=' + myAPIKey;
       
-//        Dnepr API search 
-            var url = 'http://api.openweathermap.org/data/2.5/weather' +
+      // Dnepr API search       
+         var url = 'http://api.openweathermap.org/data/2.5/weather' +
               '?q=' + 'Dnipropetrovsk, UA' +
               '&appid=' + myAPIKey;
       
@@ -37,14 +37,19 @@ Pebble.on('message', function(event) {
         //Sent message to rocky 
         Pebble.postMessage({
           'weather': {
-            // Convert from Kelvin
+            // Convert from Kelvin          
             'celcius': Math.round(weatherData.main.temp - 273.15),
             'fahrenheit': Math.round((weatherData.main.temp - 273.15) * 9 / 5 + 32),
             'desc': weatherData.weather[0].main,
             'place': weatherData.name,
-            'fullresponse':weatherData
+            'fullresponse':weatherData,
+            'wind': weatherData.wind.speed,
+            'rain': weatherData.rain['3h'],
+            'sunset': weatherData.sys.sunset
+            
           }
         });
+        console.log(weatherData.city.name);
       });
     }, function(err) {
       console.error('Error getting location');

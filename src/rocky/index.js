@@ -20,7 +20,7 @@ rocky.on('draw', function(event) {
   // Clear the screen
   ctx.clearRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
 
-  ctx.fillStyle = '#00FFAA';
+  ctx.fillStyle = '#00FF00';
   // Center align the text
   ctx.textAlign = 'center';
   //Hello world
@@ -28,22 +28,22 @@ rocky.on('draw', function(event) {
 
 
   
-//   //Draw time
-//   // Current date/time
-//   var d = new Date();
-//   // Set the text color
-//   ctx.fillStyle = '#00AAFF';
-//   // Center align the text
-//   ctx.textAlign = 'center';
-//   ctx.font = '28px Gothic';
-//   // Display the time, in the middle of the screen
-//   var verticalTextOffset = -45;
-//   ctx.fillText(d.toLocaleTimeString(), w / 2, h / 2 + verticalTextOffset, w); 
+  //Draw time
+  // Current date/time
+  var d = new Date();
+  // Set the text color
+  ctx.fillStyle = '#00AAFF';
+  // Center align the text
+  ctx.textAlign = 'center';
+  ctx.font = '28px Gothic';
+  // Display the time, in the middle of the screen
+  var verticalTextOffset = -40;
+  ctx.fillText(d.toLocaleTimeString(), w / 2, h / 2 + verticalTextOffset, w); 
   
   // Draw the conditions (before clock hands, so it's drawn underneath them)
-//   if (weather) {
-//     drawWeather(ctx, weather);
-//   }
+  if (weather) {
+    drawWeather(ctx, weather);
+  }
 
 });
 
@@ -52,7 +52,7 @@ rocky.on('draw', function(event) {
 rocky.on('secondchange', function(event) {
 
   //Invalidate current UI
-  console.log("Another second with your Pebble!");
+//   console.log("Another second with your Pebble!");
   // Request the screen to be redrawn on next pass
   rocky.requestDraw();
 
@@ -61,11 +61,11 @@ rocky.on('secondchange', function(event) {
 
 rocky.on('minutechange', function(event) {
   // Display a message in the system logs
-  console.log("Another minute with your Pebble!");
+  // console.log("Another minute with your Pebble!");
 
   // Request the screen to be redrawn on next pass
   //rocky.requestDraw();
-  //rocky.postMessage({'fetch': true});
+  rocky.postMessage({'fetch': true});
 });
 
 rocky.on('hourchange', function(event) {
@@ -80,7 +80,28 @@ function drawWeather(ctx, weather) {
   ctx.fillStyle = 'lightblue';
   ctx.textAlign = 'center';
   ctx.font = '18px Gothic';
-  ctx.fillText(weatherString, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 60);
+ ctx.fillText(weatherString, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 80);
+  
+  var weatherPlace = weather.place;
+  
+  ctx.fillStyle = 'darkblue';
+  ctx.textAlign = 'center';
+  ctx.font = '18px Gothic';
+  ctx.fillText(weatherPlace, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 60);
+  
+  var weatherWind = weather.wind;
+  var weatherRain = weather.rain ? 'Take umbrella' : 'No umbrella need';
+    
+  ctx.fillStyle = '#AA00AA';
+  ctx.textAlign = 'center';
+  ctx.font = '18px Gothic';
+  ctx.fillText('Wind speed: ' + weatherWind, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 40);
+  
+  ctx.fillStyle = '#AA00AA';
+  ctx.textAlign = 'center';
+  ctx.font = '18px Gothic';
+  
+  ctx.fillText(weatherRain, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 20);
 
 }
 
