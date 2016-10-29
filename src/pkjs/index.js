@@ -27,29 +27,46 @@ Pebble.on('message', function(event) {
 //               '&appid=' + myAPIKey;
       
       // Dnepr API search       
-         var url = 'http://api.openweathermap.org/data/2.5/weather' +
+//          var url = 'http://api.openweathermap.org/data/2.5/weather' +
+//               '?q=' + 'Dnipropetrovsk, UA' +
+//               '&appid=' + myAPIKey;
+      
+      var url = 'http://api.openweathermap.org/data/2.5/forecast/daily' +
               '?q=' + 'Dnipropetrovsk, UA' +
               '&appid=' + myAPIKey;
       
+      
+      
       request(url, 'GET', function(respText) {
         var weatherData = JSON.parse(respText);
-
+//         for(var key in weatherData){
+//         console.log(key + ' ' + weatherData[key]);
+//         }
         //Sent message to rocky 
         Pebble.postMessage({
           'weather': {
             // Convert from Kelvin          
-            'celcius': Math.round(weatherData.main.temp - 273.15),
-            'fahrenheit': Math.round((weatherData.main.temp - 273.15) * 9 / 5 + 32),
-            'desc': weatherData.weather[0].main,
-            'place': weatherData.name,
-            'fullresponse':weatherData,
-            'wind': weatherData.wind.speed
+//             'celcius': Math.round(weatherData.main.temp - 273.15),
+            'celcius': {
+              'Today': Math.round(weatherData.list[0].temp.day - 273.15),
+              'Tomorrow': Math.round(weatherData.list[1].temp.day - 273.15),
+              'AfterTom': Math.round(weatherData.list[2].temp.day - 273.15)
+            },
+            'desc': {
+              'Today': weatherData.list[0].weather[0].main,
+              'Tomorrow': weatherData.list[1].weather[0].main,
+              'AfterTom': weatherData.list[2].weather[0].main
+          },
+//             'fahrenheit': Math.round((weatherData.main.temp - 273.15) * 9 / 5 + 32),
+//             'desc': weatherData.weather[0].main,
+            'place': weatherData.city.name
+//             'fullresponse':weatherData,
+//             'wind': weatherData.wind.speed
 //             'rain': weatherData.rain['3h'],
 //             'sunset': weatherData.sys.sunset
             
           }
         });
-        console.log(weatherData.city.name);
       });
     }, function(err) {
       console.error('Error getting location');

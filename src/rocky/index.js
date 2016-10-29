@@ -24,7 +24,7 @@ rocky.on('draw', function(event) {
   // Center align the text
   ctx.textAlign = 'center';
   //Hello world
-  ctx.fillText('Hello from\n DataArt', w / 2, 20, w); 
+//   ctx.fillText('Hello from\n DataArt', w / 2, 20, w); 
 
 
   
@@ -37,7 +37,7 @@ rocky.on('draw', function(event) {
   ctx.textAlign = 'center';
   ctx.font = '28px Gothic';
   // Display the time, in the middle of the screen
-  var verticalTextOffset = -40;
+  var verticalTextOffset = -60;
   ctx.fillText(d.toLocaleTimeString(), w / 2, h / 2 + verticalTextOffset, w); 
   
   // Draw the conditions (before clock hands, so it's drawn underneath them)
@@ -65,37 +65,48 @@ rocky.on('minutechange', function(event) {
 
   // Request the screen to be redrawn on next pass
   //rocky.requestDraw();
-  rocky.postMessage({'fetch': true});
+//   rocky.postMessage({'fetch': true});
 });
 
 rocky.on('hourchange', function(event) {
   // Send a message to fetch the weather information (on startup and every hour)
- // rocky.postMessage({'fetch': true});
+ rocky.postMessage({'fetch': true});
 });
 
 function drawWeather(ctx, weather) {
+  var vertOffset = 100;
   // Create a string describing the weather
-  var weatherString = weather.celcius + 'ºC, ' + weather.desc;
-  // Draw the text, top center
   ctx.fillStyle = 'lightblue';
   ctx.textAlign = 'center';
   ctx.font = '18px Gothic';
- ctx.fillText(weatherString, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 80);
+  
+  for(var key in weather.celcius){
+    var weatherString = weather.celcius[key] + 'ºC, ' + weather.desc[key];
+    ctx.fillText(key + ': ' + weatherString, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - vertOffset);
+    vertOffset -= 20;
+    }
+//   var weatherString = weather.celcius + 'ºC, ' + weather.desc;
+  
+  // Draw the text, top center
+//   ctx.fillStyle = 'lightblue';
+//   ctx.textAlign = 'center';
+//   ctx.font = '18px Gothic';
+//   ctx.fillText(weatherString, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 80);
   
   var weatherPlace = weather.place;
   
   ctx.fillStyle = '#FFFF55';
   ctx.textAlign = 'center';
   ctx.font = '18px Gothic';
-  ctx.fillText(weatherPlace, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 60);
+  ctx.fillText(weatherPlace, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - vertOffset);
   
-  var weatherWind = weather.wind;
+//   var weatherWind = weather.wind;
 //   var weatherRain = weather.rain ? 'Take umbrella' : 'No umbrella need';
     
-  ctx.fillStyle = '#AA00AA';
-  ctx.textAlign = 'center';
-  ctx.font = '18px Gothic';
-  ctx.fillText('Wind speed: ' + weatherWind, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 40);
+//   ctx.fillStyle = '#AA00AA';
+//   ctx.textAlign = 'center';
+//   ctx.font = '18px Gothic';
+//   ctx.fillText('Wind speed: ' + weatherWind, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 40);
   
 //   ctx.fillStyle = '#AA00AA';
 //   ctx.textAlign = 'center';
