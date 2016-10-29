@@ -4,7 +4,7 @@ Dmitry Sherbina
 **/
 // PebbleKit JS (pkjs)
 
-var myAPIKey = 'db6e8b809ff42855de357c37716aec64';
+var myAPIKey = '3ea700000ffa8bba2ebefdf4913c0f96';
 
 
 Pebble.on('message', function(event) {
@@ -43,9 +43,9 @@ Pebble.on('message', function(event) {
             'desc': weatherData.weather[0].main,
             'place': weatherData.name,
             'fullresponse':weatherData,
-            'wind': weatherData.wind.speed,
-            'rain': weatherData.rain['3h'],
-            'sunset': weatherData.sys.sunset
+            'wind': weatherData.wind.speed
+//             'rain': weatherData.rain['3h'],
+//             'sunset': weatherData.sys.sunset
             
           }
         });
@@ -59,17 +59,47 @@ Pebble.on('message', function(event) {
 });
 
 /*
-{"coord":{"lon":139,"lat":35},
-"sys":{"country":"JP","sunrise":1369769524,"sunset":1369821049},
-"weather":[{"id":804,"main":"clouds","description":"overcast clouds","icon":"04n"}],
-"main":{"temp":289.5,"humidity":89,"pressure":1013,"temp_min":287.04,"temp_max":292.04},
-"wind":{"speed":7.31,"deg":187.002},
-"rain":{"3h":0},
-"clouds":{"all":92},
-"dt":1369824698,
-"id":1851632,
-"name":"Shuzenji",
-"cod":200}
+{
+  "coord": {
+    "lon": 34.98,
+    "lat": 48.45
+  },
+  "weather": [
+    {
+      "id": 804,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "icon": "04n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 278.387,
+    "pressure": 1013.41,
+    "humidity": 93,
+    "temp_min": 278.387,
+    "temp_max": 278.387,
+    "sea_level": 1024.73,
+    "grnd_level": 1013.41
+  },
+  "wind": {
+    "speed": 5.71,
+    "deg": 276
+  },
+  "clouds": {
+    "all": 88
+  },
+  "dt": 1477760820,
+  "sys": {
+    "message": 0.029,
+    "country": "UA",
+    "sunrise": 1477714966,
+    "sunset": 1477751037
+  },
+  "id": 709930,
+  "name": "Dnipropetrovsk",
+  "cod": 200
+}
 */
 
 function request(url, type, callback) {

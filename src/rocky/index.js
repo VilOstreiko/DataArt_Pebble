@@ -84,24 +84,24 @@ function drawWeather(ctx, weather) {
   
   var weatherPlace = weather.place;
   
-  ctx.fillStyle = 'darkblue';
+  ctx.fillStyle = '#FFFF55';
   ctx.textAlign = 'center';
   ctx.font = '18px Gothic';
   ctx.fillText(weatherPlace, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 60);
   
   var weatherWind = weather.wind;
-  var weatherRain = weather.rain ? 'Take umbrella' : 'No umbrella need';
+//   var weatherRain = weather.rain ? 'Take umbrella' : 'No umbrella need';
     
   ctx.fillStyle = '#AA00AA';
   ctx.textAlign = 'center';
   ctx.font = '18px Gothic';
   ctx.fillText('Wind speed: ' + weatherWind, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 40);
   
-  ctx.fillStyle = '#AA00AA';
-  ctx.textAlign = 'center';
-  ctx.font = '18px Gothic';
+//   ctx.fillStyle = '#AA00AA';
+//   ctx.textAlign = 'center';
+//   ctx.font = '18px Gothic';
   
-  ctx.fillText(weatherRain, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 20);
+//   ctx.fillText(weatherRain, ctx.canvas.unobstructedWidth / 2,  ctx.canvas.unobstructedHeight - 20);
 
 }
 
@@ -117,3 +117,6 @@ rocky.on('message', function(event) {
     rocky.requestDraw();
   }
 });
+
+
+// city color change to more visible one 
