@@ -1,3 +1,9 @@
+/**
+DataArt Workshop
+Pebble Watches
+Dmitry Sherbina
+**/
+
 var rocky = require('rocky');
 
 // Global object to store weather data
@@ -17,6 +23,11 @@ rocky.on('draw', function(event) {
 //   ctx.fillStyle = 'green';
 //   ctx.fillRect(0, 30, 144, 30);
   
+  ctx.fillStyle = '#00FFAA';
+  // Center align the text
+  ctx.textAlign = 'center';
+  //Hello world
+  ctx.fillText('Hello from\n DataArt', w / 2, 10, w); 
 
   
   //Draw time

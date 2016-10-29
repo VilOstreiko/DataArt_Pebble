@@ -1,3 +1,7 @@
+/**
+DataArt IT Talk
+Dmitry Sherbina
+**/
 // PebbleKit JS (pkjs)
 
 var myAPIKey = 'db6e8b809ff42855de357c37716aec64';
@@ -11,10 +15,10 @@ Pebble.on('message', function(event) {
     navigator.geolocation.getCurrentPosition(function(pos) {
       
       
-//       var url = 'http://api.openweathermap.org/data/2.5/weather' +
-//               '?lat=' + pos.coords.latitude +
-//               '&lon=' + pos.coords.longitude +
-//               '&appid=' + myAPIKey;
+      var url = 'http://api.openweathermap.org/data/2.5/weather' +
+              '?lat=' + pos.coords.latitude +
+              '&lon=' + pos.coords.longitude +
+              '&appid=' + myAPIKey;
       
       //Dneprs location 
 //             var url = 'http://api.openweathermap.org/data/2.5/weather' +
@@ -22,17 +26,14 @@ Pebble.on('message', function(event) {
 //               '&lon=' + '48.464717' +
 //               '&appid=' + myAPIKey;
       
-        //Dneprs search 
+//        Dnepr API search 
             var url = 'http://api.openweathermap.org/data/2.5/weather' +
               '?q=' + 'Dnipropetrovsk, UA' +
               '&appid=' + myAPIKey;
-
-
+      
       request(url, 'GET', function(respText) {
         var weatherData = JSON.parse(respText);
 
-       // console.log(weatherData);
-        
         //Sent message to rocky 
         Pebble.postMessage({
           'weather': {
