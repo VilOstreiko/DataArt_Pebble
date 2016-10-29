@@ -15,10 +15,10 @@ Pebble.on('message', function(event) {
     navigator.geolocation.getCurrentPosition(function(pos) {
       
       
-      var url = 'http://api.openweathermap.org/data/2.5/weather' +
-              '?lat=' + pos.coords.latitude +
-              '&lon=' + pos.coords.longitude +
-              '&appid=' + myAPIKey;
+//       var url = 'http://api.openweathermap.org/data/2.5/weather' +
+//               '?lat=' + pos.coords.latitude +
+//               '&lon=' + pos.coords.longitude +
+//               '&appid=' + myAPIKey;
       
       //Dneprs location 
 //             var url = 'http://api.openweathermap.org/data/2.5/weather' +
